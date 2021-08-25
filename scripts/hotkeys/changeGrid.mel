@@ -1,0 +1,18 @@
+//
+//  Author: Beat Reichenbach
+//  Date: 10/09/2015
+//
+//  Description: Change grid size, 0 = smaller, 1 = bigger. Assign the function br_changeGrid(0) to ctrl + [ and br_changeGrid(1) to ctrl + ] for example.        
+//
+
+global proc br_changeGrid(int $div) {
+    if ($div == 0) {
+        grid -divisions (`grid -query -divisions` * 2);
+    } else if ($div == 1) {
+        grid -divisions (`grid -query -divisions` / 2);
+    }
+    float $units = `grid -query -spacing` / `grid -query -divisions`;
+    $text = $units + " Unit";
+    if ($units != 1) { $text += "s"; }
+    inViewMessage -smg $text -pos topCenter -bkc 0x00000000 -fade;
+}

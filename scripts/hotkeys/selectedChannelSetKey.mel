@@ -1,0 +1,13 @@
+//
+//  Author: Beat Reichenbach
+//  Date: 10/09/2015
+//
+//  Description: Assign this function to s to set keys on selected channels only
+//
+
+global proc br_selectedChannelSetKey() {
+    $selectedAttrs = `channelBox -q -sma mainChannelBox`;
+    for( $attr in $selectedAttrs ) {
+        setKeyframe -at $attr;
+    }
+}

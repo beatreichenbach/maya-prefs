@@ -1,0 +1,118 @@
+//Maya Preference 2022 (Release 1)
+//
+//
+
+nameCommand
+	-annotation "selectedChannelSetKeyNameCommand"
+	-sourceType "mel"
+	-command ("selectedChannelSetKey")
+	selectedChannelSetKeyNameCommand;
+
+nameCommand
+	-annotation "toggleIsolateSelectedNameCommand"
+	-sourceType "mel"
+	-command ("toggleIsolateSelected")
+	toggleIsolateSelectedNameCommand;
+
+nameCommand
+	-annotation "largerGridNameCommand"
+	-sourceType "mel"
+	-command ("largerGrid")
+	largerGridNameCommand;
+
+nameCommand
+	-annotation "smallerGridNameCommand"
+	-sourceType "mel"
+	-command ("smallerGrid")
+	smallerGridNameCommand;
+
+nameCommand
+	-annotation "moveCmdNameCommand"
+	-sourceType "mel"
+	-command ("movePress")
+	moveCmdNameCommand;
+
+nameCommand
+	-annotation "movePopDownNameCommand"
+	-sourceType "mel"
+	-command ("moveRelease")
+	movePopDownNameCommand;
+
+nameCommand
+	-annotation "movePressNameCommand"
+	-sourceType "mel"
+	-command ("movePress")
+	movePressNameCommand;
+
+nameCommand
+	-annotation "moveReleaseNameCommand"
+	-sourceType "mel"
+	-command ("moveRelease")
+	moveReleaseNameCommand;
+
+nameCommand
+	-annotation "scaleReleaseNameCommand"
+	-sourceType "mel"
+	-command ("scaleRelease")
+	scaleReleaseNameCommand;
+
+nameCommand
+	-annotation "scalePressNameCommand"
+	-sourceType "mel"
+	-command ("scalePress")
+	scalePressNameCommand;
+
+nameCommand
+	-annotation "rotateReleaseNameCommand"
+	-sourceType "mel"
+	-command ("rotateRelease")
+	rotateReleaseNameCommand;
+
+nameCommand
+	-annotation "rotatePressNameCommand"
+	-sourceType "mel"
+	-command ("rotatePress")
+	rotatePressNameCommand;
+
+nameCommand
+	-annotation "PolyCreaseToolNameCommand"
+	-sourceType "mel"
+	-command ("PolyCreaseTool")
+	PolyCreaseToolNameCommand;
+
+nameCommand
+	-annotation "FlipTriangleEdgeNameCommand"
+	-sourceType "mel"
+	-command ("FlipTriangleEdge")
+	FlipTriangleEdgeNameCommand;
+
+nameCommand
+	-annotation "duplicateInputConnectionsNameCommand"
+	-sourceType "mel"
+	-command ("duplicateInputConnections")
+	duplicateInputConnectionsNameCommand;
+
+nameCommand
+	-annotation "FlipTriEdgeNameCommand"
+	-sourceType "mel"
+	-command ("FlipTriEdge")
+	FlipTriEdgeNameCommand;
+
+nameCommand
+	-annotation "Crease_PressNameCommand"
+	-sourceType "mel"
+	-command ("Crease_Press")
+	Crease_PressNameCommand;
+
+nameCommand
+	-annotation "Crease_ReleaseNameCommand"
+	-sourceType "mel"
+	-command ("Crease_Release")
+	Crease_ReleaseNameCommand;
+
+nameCommand
+	-annotation "pasteSelectedNameCommand"
+	-sourceType "mel"
+	-command ("pasteSelected")
+	pasteSelectedNameCommand;
+

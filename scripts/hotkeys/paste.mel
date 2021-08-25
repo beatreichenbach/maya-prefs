@@ -1,0 +1,72 @@
+// removing the pasted__ prefix
+
+global proc pasteScene()
+{
+
+	/* Begin: MAYA-39777
+
+	   Maya 2015 copy writes out to ascii or binary
+	   depending on file format open:
+	   paste expects matching file type:
+	   therefore ascii copy paste to binary fails
+	*/
+
+	string $userTmpDir = `internalVar -userTmpDir`;
+	string $clipBoardFiles;
+	string $filePath;
+
+	//Get the latest maya clipboard scene, whether ascii or binary
+	if (!`about -ltVersion`)
+	{
+		string $presentWorkingDir = `pwd`;
+		chdir($userTmpDir);
+
+		if (`about -linux` == 1)
+		{
+			$clipBoardFiles = `system("ls -t maya_sceneClipBoard.m*")`;
+		}
+		else if (`about -mac` == 1)
+		{
+			$clipBoardFiles = `system("ls -t maya_sceneClipBoard.m*")`;
+		}
+		else if (`about -windows` == 1)
+		{
+			$clipBoardFiles = `system("dir /b /o:-D maya_sceneClipBoard.m*")`;
+		}
+
+		string $mayaSceneBuffer[];
+		int $sceneCount = tokenize($clipBoardFiles, $mayaSceneBuffer);
+
+		if (`file -q -exists ($userTmpDir + $mayaSceneBuffer[0])` == 1)
+		{
+			$filePath = ($userTmpDir + $mayaSceneBuffer[0]);
+		}
+		chdir($presentWorkingDir);
+	}
+	//End: MAYA-39777
+
+	else
+	{
+		// Determine current scene file type
+		string $getFileType[] = `file -q -type`;
+		string $fileExt;
+
+		if (`about -ltVersion`) {
+			$fileExt = ".mlt";
+		}
+
+		// determine temp directory
+		string $tmpFile = "/maya_sceneClipBoard" + $fileExt;
+		$filePath = ($userTmpDir + $tmpFile);
+	}
+
+	// import scene
+	string $newTransforms[] = `file -force
+		-import
+		-defaultNamespace
+		-groupReference
+		-returnNewNodes
+		$filePath`;
+
+	select -replace `ls -dag -head 1 $newTransforms`;
+}

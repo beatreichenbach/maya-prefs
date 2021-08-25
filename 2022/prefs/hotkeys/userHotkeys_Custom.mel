@@ -1,0 +1,44 @@
+//Maya Preference 2022 (Release 1)
+//
+//
+
+//
+// The hotkey set
+//
+hotkeySet -source "Maya_Default" -current Custom;
+//
+// The hotkey contexts and hotkeys
+//
+hotkey -keyShortcut "s" -name ("selectedChannelSetKeyNameCommand");
+hotkey -keyShortcut "c" -alt -name ("Crease_PressNameCommand");
+hotkey -keyShortcut "c" -alt -releaseName ("Crease_ReleaseNameCommand");
+hotkey -keyShortcut "[" -ctl -name ("smallerGridNameCommand");
+hotkey -keyShortcut "e" -name ("rotatePressNameCommand");
+hotkey -keyShortcut "e" -releaseName ("rotateReleaseNameCommand");
+hotkey -keyShortcut "]" -ctl -name ("largerGridNameCommand");
+hotkey -keyShortcut "w" -name ("movePressNameCommand");
+hotkey -keyShortcut "w" -releaseName ("moveReleaseNameCommand");
+hotkey -keyShortcut "v" -ctl -name ("pasteSelectedNameCommand");
+hotkey -keyShortcut "\\" -name ("FlipTriEdgeNameCommand");
+hotkey -keyShortcut "r" -name ("scalePressNameCommand");
+hotkey -keyShortcut "\\" -releaseName ("");
+hotkey -keyShortcut "r" -releaseName ("scaleReleaseNameCommand");
+hotkey -keyShortcut "d" -alt -name ("duplicateInputConnectionsNameCommand");
+hotkey -keyShortcut "i" -sht -name ("toggleIsolateSelectedNameCommand");
+hotkeyCtx -type "Editor" -addClient "graphEditor";
+hotkeyCtx -type "Editor" -addClient "nodeEditorPanel";
+hotkeyCtx -type "Editor" -addClient "polyTexturePlacementPanel";
+hotkeyCtx -type "Editor" -addClient "profilerPanel";
+hotkeyCtx -type "Editor" -addClient "timeEditorPanel";
+hotkeyCtx -type "Editor" -addClient "shapePanel";
+hotkeyCtx -type "Editor" -addClient "outlinerPanel";
+hotkeyCtx -type "Editor" -addClient "posePanel";
+hotkeyCtx -type "Editor" -addClient "hyperGraphPanel";
+hotkeyCtx -type "Editor" -addClient "hyperShadePanel";
+hotkeyCtx -type "Tool" -addClient "texSculptCacheContext";
+hotkeyCtx -type "Tool" -addClient "sculptMeshCache";
+hotkeyCtx -type "Tool" -addClient "xgmIGBrush";
+hotkeyCtx -type "Tool" -addClient "polyCutUV";
+hotkeyCtx -type "Tool" -addClient "Unfold3DBrush";
+hotkeyCtx -type "Tool" -addClient "SymmetrizeUVBrush";
+hotkeyCtx -type "Tool" -addClient "texCutContext";
