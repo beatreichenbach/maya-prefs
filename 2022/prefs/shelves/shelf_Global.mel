@@ -69,9 +69,9 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import br_setPivot\nbr_setPivot.setPivot()" 
+        -command "import set_pivot\nset_pivot.set_pivot()"
         -sourceType "python" 
-        -doubleClickCommand "import br_copyTransform\nbr_copyTransform.copyTransform()" 
+        -doubleClickCommand "import copy_transform\ncopy_transform.copy_transform()"
         -commandRepeatable 1
         -flat 1
     ;
@@ -256,7 +256,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import br_curveTools\nreload(br_curveTools)\nbr_curveTools.ui()" 
+        -command "import curve_tools\ncurve_tools.ui()"
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -310,7 +310,7 @@ global proc shelf_Global () {
         -backgroundColor 0 0 0 
         -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
-        -label "from randomizer import gui\ngui.show()" 
+        -label "Apply random transformations to objects with live preview functionality."
         -labelOffset 0
         -rotation 0
         -flipX 0
@@ -378,7 +378,7 @@ global proc shelf_Global () {
         -backgroundColor 0 0 0 
         -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
-        -label "import re\nselection = \"\".join(cmds.ls(selection=True))\nindices =..." 
+        -label "Select every nth edge."
         -labelOffset 0
         -rotation 0
         -flipX 0
@@ -392,7 +392,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import re\nselection = \"\".join(cmds.ls(selection=True))\nindices = map(int, re.findall('\\[([0-9]+)\\]', selection))\nif len(indices) >= 2:\n    cmds.polySelect(rpt=indices[:2])" 
+        -command "import select_nth_edge\nselect_nth_edge.select_nth_edge()"
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -560,7 +560,7 @@ global proc shelf_Global () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Extract the currently selected faces from their shell and shows a manipulator to adjust their offset" 
+        -annotation "Extract the currently selected faces from the object without separating different shells."
         -enableBackground 0
         -backgroundColor 0 0 0 
         -highlightColor 0.321569 0.521569 0.65098 
@@ -579,7 +579,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import pymel.core as pm\n\nfaces = pm.ls(sl=True)\nfacesNum = []\nfor f in faces:\n    print f\n    facesNum.extend(f.indices())\n\norigTransform = pm.listRelatives(pm.listRelatives(p=True)[0],p=True)[0]\nnewTransform = pm.duplicate(origTransform)[0]\n\npm.delete(origTransform.f[facesNum])\npm.select(newTransform.f[:],r=True)\npm.select(newTransform.f[facesNum],d=True)\npm.delete()" 
+        -command "import extract_faces\nextract_faces.extract_faces()"
         -sourceType "python" 
         -doubleClickCommand "polySeparate -sss 2" 
         -commandRepeatable 1
@@ -662,7 +662,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import br_combine\nbr_combine.combine()\n" 
+        -command "import combine\ncombine.combine()\n"
         -sourceType "python" 
         -doubleClickCommand "CombinePolygonsOptions;" 
         -commandRepeatable 1
@@ -732,9 +732,9 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import br_mergeVertices\nbr_mergeVertices.mergeVertices(0.001)" 
+        -command "import merge_vertices\nmerge_vertices.merge_vertices(0.001)"
         -sourceType "python" 
-        -doubleClickCommand "import br_functions\nbr_functions.mergeVertices(0.01)" 
+        -doubleClickCommand "import merge_vertices\nmerge_vertices.merge_vertices(0.01)"
         -commandRepeatable 1
         -flat 1
     ;
@@ -780,9 +780,9 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import br_selectByNormal\nbr_selectByNormal.selectByNormal(35)" 
+        -command "import select_by_normal\nselect_by_normal.select_by_normal(35)"
         -sourceType "python" 
-        -doubleClickCommand "import br_selectByNormal\nbr_selectByNormal.selectByNormal(90)" 
+        -doubleClickCommand "import select_by_normal\nselect_by_normal.select_by_normal(90)"
         -commandRepeatable 1
         -flat 1
     ;
@@ -796,7 +796,7 @@ global proc shelf_Global () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Selects Hard Edges" 
+        -annotation "Select Hard Edges"
         -enableBackground 0
         -backgroundColor 0 0 0 
         -highlightColor 0.321569 0.521569 0.65098 
@@ -815,7 +815,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "cmds.selectType(pe=True)\ncmds.polySelectConstraint(m=3, t=0x8000, sm=1)\nedges = cmds.ls(selection=True)\ncmds.polySelectConstraint(sm=0)\ncmds.select(edges)\ncmds.polySelectConstraint(disable=True)" 
+        -command "import select_hard_edges\nselect_hard_edges.select_hard_edges()"
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -884,9 +884,9 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "from maya import cmds \n\nselection = cmds.ls(sl=True)\nfor s in selection:\n\t    cmds.polySoftEdge(s,a=35,ch=1)" 
+        -command "from maya import cmds\nfor s in cmds.ls(sl=True):\n    cmds.polySoftEdge(s, a=35, ch=1)"
         -sourceType "python" 
-        -doubleClickCommand "from maya import cmds \n\nselection = cmds.ls(sl=True)\nfor s in selection:\n\t    cmds.polySoftEdge(s,a=47,ch=1)" 
+        -doubleClickCommand "from maya import cmds\nfor s in cmds.ls(sl=True):\n    cmds.polySoftEdge(s, a=47, ch=1)"
         -commandRepeatable 1
         -flat 1
     ;
@@ -919,7 +919,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "from maya import cmds\n\nfor object in cmds.ls(selection=True):\n\tattr = object + '.osdVertBoundary'\n\tcmds.setAttr(attr, 3 - cmds.getAttr(attr))" 
+        -command "from maya import cmds\nfor object in cmds.ls(selection=True):\n\tattr = object + '.osdVertBoundary'\n\tcmds.setAttr(attr, 3 - cmds.getAttr(attr))"
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -955,7 +955,7 @@ global proc shelf_Global () {
         -marginHeight 1
         -command "CreatePolyFromPreview" 
         -sourceType "mel" 
-        -doubleClickCommand "from maya import cmds\n\nfor obj in cmds.ls(selection=True):\n    shapes = cmds.listRelatives(obj, shapes=True)\n    if not shapes:\n        continue\n         \n    shape = shapes[0]\n    smooth_level = cmds.getAttr('{}.smoothLevel'.format(shape))\n    ofb = cmds.getAttr('{}.osdFvarBoundary'.format(shape))\n    ovb = cmds.getAttr('{}.osdVertBoundary'.format(shape))\n    ofc = cmds.getAttr('{}.osdFvarPropagateCorners'.format(shape))\n    shape_smooth = cmds.duplicate(shape)\n    cmds.polySmooth(shape_smooth, method=0, subdivisionType=2, osdVertBoundary=ovb, osdFvarBoundary=ofb, osdFvarPropagateCorners=ofc, osdSmoothTriangles=0, osdCreaseMethod=0, divisions=smooth_level)\n    cmds.select(shape_smooth)" 
+        -doubleClickCommand "import poly_smooth\npoly_smooth.poly_smooth()"
         -commandRepeatable 1
         -flat 1
     ;
@@ -982,12 +982,12 @@ global proc shelf_Global () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Creates ShotCam from the current view" 
+        -annotation "Creates camera from the current view"
         -enableBackground 0
         -backgroundColor 0 0 0 
         -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
-        -label "Create ShotCam" 
+        -label "Create Camera"
         -labelOffset 0
         -rotation 0
         -flipX 0
@@ -1001,7 +1001,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import br_createCamera\nbr_createCamera.createCamera()" 
+        -command "import create_camera\ncreate_camera.create_camera()"
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -1071,7 +1071,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import mtoa.ui.arnoldmenu;mtoa.ui.arnoldmenu.arnoldOpenMtoARenderView()" 
+        -command "import mtoa.ui.arnoldmenu; mtoa.ui.arnoldmenu.arnoldOpenMtoARenderView()"
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -1188,7 +1188,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import br_removeShapes\nbr_removeShapes.removeShapes()" 
+        -command "import remove_shapes\nremove_shapes.remove_shapes()"
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -1203,7 +1203,7 @@ global proc shelf_Global () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Renames objects | Renames File Extensions" 
+        -annotation "Renames objects"
         -enableBackground 0
         -backgroundColor 0 0 0 
         -highlightColor 0.321569 0.521569 0.65098 
@@ -1257,7 +1257,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import br_removeNamespaces\nbr_removeNamespaces.removeNamespaces()" 
+        -command "import remove_namespaces\nremove_namespaces.remove_namespaces()"
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -1291,9 +1291,9 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import br_fileFunctions\nbr_fileFunctions.importFiles()" 
+        -command "import file_utils\nfile_utils.import_files()"
         -sourceType "python" 
-        -doubleClickCommand "import br_fileFunctions\nbr_fileFunctions.exportSelected(single=False)" 
+        -doubleClickCommand "import file_utils\nfile_utils.export_selected(single=False)"
         -commandRepeatable 1
         -flat 1
     ;
@@ -1307,12 +1307,12 @@ global proc shelf_Global () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "from maya import cmds\nimport re\nfilename = cmds.file(sceneName=True, query=True)\nm = re.match('(.+)_v(\\d{3})\\.(.+)', filename)\nif 3 == len(m.groups()):\n    filename = '{0}_v{1:03d}.{2}'.format(m.group(1), int(m.group(2)) + 1, m.group(3))\ncmds.file(rename=filename)\ncmds.file(save=True)" 
+        -annotation "Save incremental."
         -enableBackground 0
         -backgroundColor 0 0 0 
         -highlightColor 0.321569 0.521569 0.65098 
         -align "center" 
-        -label "from maya import cmds\nimport re\nfilename = cmds.file(sceneName=T..." 
+        -label "Save incremental."
         -labelOffset 0
         -rotation 0
         -flipX 0
@@ -1326,7 +1326,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "from maya import cmds\nimport re\nfilename = cmds.file(sceneName=True, query=True)\nm = re.match('(.+)_v(\\d{3})\\.(.+)', filename)\nif 3 == len(m.groups()):\n    filename = '{0}_v{1:03d}.{2}'.format(m.group(1), int(m.group(2)) + 1, m.group(3))\ncmds.file(rename=filename)\ncmds.file(save=True)" 
+        -command "import file_utils\nfile_utils.save_incremental()"
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -1360,7 +1360,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "for sg in cmds.ls(selection=True):\n    mtl = cmds.listConnections('{}.surfaceShader'.format(sg), source=True)[0]\n    cmds.rename(sg, mtl.replace('mtl', 'sg'))" 
+        -command "import rename_shadinggroups\nrename_shadinggroups.rename_shadinggroups()"
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -1407,7 +1407,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "uvlayout_open;\n" 
+        -command "uvlayout_open;"
         -sourceType "mel" 
         -commandRepeatable 1
         -flat 1
@@ -1441,7 +1441,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import br_unwrapObjects\nbr_unwrapObjects.unwrapObjects()" 
+        -command "import unwrap_objects\nunwrap_objects.unwrap_objects()"
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -1475,9 +1475,9 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import br_cutHardEdges\nbr_cutHardEdges.cutHardEdges()" 
+        -command "import cut_hard_edges\ncut_hard_edges.cut_hard_edges()"
         -sourceType "python" 
-        -doubleClickCommand "import br_cubeUnwrap\nbr_cubeUnwrap.ui()" 
+        -doubleClickCommand "import cube_unwrap\ncube_unwrap.ui()"
         -commandRepeatable 1
         -flat 1
     ;
@@ -1510,7 +1510,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import br_transferUVs\nbr_transferUVs.ui()" 
+        -command "import transfer_uvs\ntransfer_uvs.ui()"
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -1544,7 +1544,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import br_mirrorPatches\nbr_mirrorPatches.mirrorPatches()" 
+        -command "import mirror_patches\nmirror_patches.mirror_patches()"
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -1559,7 +1559,7 @@ global proc shelf_Global () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Lays out UVs from objects with Space in between" 
+        -annotation "Layout uvs grouped by objects and gaps in between."
         -enableBackground 0
         -backgroundColor 0 0 0 
         -highlightColor 0.321569 0.521569 0.65098 
@@ -1578,7 +1578,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "previous = (0, 0)\nobjects = cmds.ls(selection=True)\nfor obj in objects:\n    boundingBox = cmds.polyEvaluate(obj, boundingBox2d=True)\n    cmds.select('{}.map[0:{}]'.format(obj, cmds.polyEvaluate(obj, uv=True)), replace=True)\n    offsetX = - boundingBox[0][0] + previous[0] + 0.05\n    offsetY = - boundingBox[1][0] + 0.05\n    cmds.polyEditUV(u=offsetX, v=offsetY)\n    previous = (offsetX + boundingBox[0][1], offsetY + boundingBox[1][1])\ncmds.select(objects, replace=True)\n    " 
+        -command "import layout_uvs\nlayout_uvs.layout_uvs()"
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1

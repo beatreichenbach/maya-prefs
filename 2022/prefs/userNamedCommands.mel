@@ -81,12 +81,6 @@ nameCommand
 	PolyCreaseToolNameCommand;
 
 nameCommand
-	-annotation "FlipTriangleEdgeNameCommand"
-	-sourceType "mel"
-	-command ("FlipTriangleEdge")
-	FlipTriangleEdgeNameCommand;
-
-nameCommand
 	-annotation "duplicateInputConnectionsNameCommand"
 	-sourceType "mel"
 	-command ("duplicateInputConnections")

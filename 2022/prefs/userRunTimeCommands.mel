@@ -12,7 +12,7 @@ runTimeCommand
 	-category "Custom Scripts"
 	-hotkeyCtx ""
 	-commandLanguage "mel"
-	-command ("br_selectedChannelSetKey();")
+	-command ("selectedChannelSetKey();")
 	selectedChannelSetKey;
 
 runTimeCommand
@@ -25,7 +25,7 @@ runTimeCommand
 	-category "Custom Scripts"
 	-hotkeyCtx ""
 	-commandLanguage "mel"
-	-command ("br_changeGrid(1);")
+	-command ("changeGridDivisions(bigger=true);")
 	largerGrid;
 
 runTimeCommand
@@ -38,7 +38,7 @@ runTimeCommand
 	-category "Custom Scripts"
 	-hotkeyCtx ""
 	-commandLanguage "mel"
-	-command ("br_changeGrid(0);")
+	-command ("changeGridDivisions(smaller=true);")
 	smallerGrid;
 
 runTimeCommand
@@ -51,7 +51,7 @@ runTimeCommand
 	-category "Custom Scripts"
 	-hotkeyCtx ""
 	-commandLanguage "mel"
-	-command ("br_toggleIsolateSelected();")
+	-command ("toggleIsolateSelected();")
 	toggleIsolateSelected;
 
 runTimeCommand
@@ -194,6 +194,6 @@ runTimeCommand
 	-category "Custom Scripts"
 	-hotkeyCtx ""
 	-commandLanguage "mel"
-	-command ("source br_paste.mel;\nPasteSelected;")
+	-command ("source pasteScene.mel;\nPasteSelected;")
 	pasteSelected;
 

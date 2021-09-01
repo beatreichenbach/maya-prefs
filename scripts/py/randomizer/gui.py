@@ -153,13 +153,13 @@ class RandomizeDialog(QtWidgets.QDialog):
             select_random(self.objects, kwargs)
 
     def accept(self):
-        cmds.select(self.objects.keys(), replace=True)
+        cmds.select(list(self.objects.keys()), replace=True)
         cmds.undoInfo(closeChunk=True)
 
         super(RandomizeDialog, self).accept()
 
     def reject(self):
-        cmds.select(self.objects.keys(), replace=True)
+        cmds.select(list(self.objects.keys()), replace=True)
 
         for obj, data in self.objects.iteritems():
             for attribute in ('translation', 'rotation', 'scale'):
@@ -171,7 +171,7 @@ class RandomizeDialog(QtWidgets.QDialog):
 
 def show():
     OpenMayaUI.MQtUtil.mainWindow()
-    mayaMainWindow = wrapInstance(long(OpenMayaUI.MQtUtil.mainWindow()), QtWidgets.QWidget)
+    mayaMainWindow = wrapInstance(int(OpenMayaUI.MQtUtil.mainWindow()), QtWidgets.QWidget)
     dialog = RandomizeDialog(mayaMainWindow)
     dialog.show()
 

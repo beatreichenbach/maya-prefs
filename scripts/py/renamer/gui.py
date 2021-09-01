@@ -1,13 +1,13 @@
 import sys
 import os
 import re
-from functools import wraps
 
 from PySide2 import QtCore, QtUiTools, QtWidgets
 from shiboken2 import wrapInstance
 
 from maya import cmds, OpenMayaUI
-from undo import undo
+from .undo import undo
+
 
 @undo
 def renameNodes(**kwargs):
@@ -115,14 +115,15 @@ class RenameDialog(QtWidgets.QDialog):
 
 
 class LineEdit(QtWidgets.QLineEdit):
+    # Bug when pressing shift in maya line edit widgets
     def keyPressEvent(self, event):
         if event.key() != QtCore.Qt.Key.Key_Control and event.key() != QtCore.Qt.Key.Key_Shift:
-            super(LineEditSpaces, self).keyPressEvent(event)
+            super(LineEdit, self).keyPressEvent(event)
 
 
 def show():
     OpenMayaUI.MQtUtil.mainWindow()
-    mayaMainWindow = wrapInstance(long(OpenMayaUI.MQtUtil.mainWindow()), QtWidgets.QWidget)
+    mayaMainWindow = wrapInstance(int(OpenMayaUI.MQtUtil.mainWindow()), QtWidgets.QWidget)
     dialog = RenameDialog(mayaMainWindow)
     dialog.show()
 

@@ -1,22 +1,9 @@
-'''
-  Author: Beat Reichenbach
-  Date: 10/02/2015
-  Version: 1.0
-
-  Description: Sets the translate pivot to the rotate/scale pivot
-
-  Installation: 1. Copy the script to your maya profile, %USERPROFILE%\Documents\maya\scripts
-                   2. Script is now available as a python module
-                   3. Put the code below in a button (make sure to set it to python) or run in a python script window.
-  
-import br_setPivot
-br_setPivot.setPivot()
-
-'''
+# Sets the translate pivot to the rotate/scale pivot.
 
 from maya import cmds
 
-def setPivot():
+
+def set_pivot():
     selection = cmds.ls(selection=True, type='transform')
     for s in selection:
         parents = cmds.listRelatives(s, parent=True, type='transform', path=True)

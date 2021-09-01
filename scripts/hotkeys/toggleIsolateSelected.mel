@@ -1,11 +1,6 @@
-//
-//  Author: Beat Reichenbach
-//  Date: 10/09/2015
-//
-//  Description: Assign this function to Shift + i to toggle the isolate mode
-//
+// Toggles the state for the isolate selected in the current panel.
 
-global proc br_toggleIsolateSelected() {
+global proc toggleIsolateSelected() {
     $currentPanel = `getPanel -wf`;
     $state = `isolateSelect -q -state $currentPanel`;
     $state = 1 - $state;

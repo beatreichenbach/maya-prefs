@@ -1,7 +1,7 @@
-// removing the pasted__ prefix
+// Pastes the current scene from the clipboard without the pasted__ prefix.
+// This overrides the built in command for ctrl-v.
 
-global proc pasteScene()
-{
+global proc pasteScene() {
 
 	/* Begin: MAYA-39777
 

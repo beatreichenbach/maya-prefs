@@ -1,24 +1,7 @@
-'''
-  Author: Beat Reichenbach
-  Date: 02/14/2017
-  Version: 1.1
-
-  Description: Curve tools to instance and place along curve.
-  
-  Installation: 1. Copy the script to your maya profile, %USERPROFILE%\Documents\maya\scripts
-                2. Script is now available as a python module
-                3. Put the code below in a button (make sure to set it to python) or run in a python script window.
-  
-import br_curveTools
-br_curveTools.ui()
-
-'''
+# Curve tools to instance and place along curve
 
 from maya import cmds
-import random as rand
 from maya import mel
-from functools import partial
-
 
 
 class CurveTools:
@@ -30,8 +13,7 @@ class CurveTools:
         self.deformCurve = ''
         self.previewGeo = ''
         self.curveInfo = ''
-        
-        
+
     def deleteWindow(self, *args):
         cmds.deleteUI(self.window)  
         
@@ -69,10 +51,15 @@ class CurveTools:
         
         cmds.window(self.window, edit=True, widthHeight=(200, ((len(self.buttons) - 5) * 40 + 20)))
         
-        
         offsets = [[0, 0], [136, 0], [0, 1], [85, 1], [0, 2], [0, 3], [85, 3], [0, 4], [85, 4], [0, 5], [0, 6], [85, 6], [0, 7]]
         for i, button in enumerate(self.buttons):
-            cmds.formLayout(form, edit=True, attachForm=[(button, 'left', offsets[i][0] + 20), (button, 'top', offsets[i][1] * 40 + 20)])
+            cmds.formLayout(
+                form,
+                edit=True,
+                attachForm=[
+                    (button, 'left', offsets[i][0] + 20),
+                    (button, 'top', offsets[i][1] * 40 + 20)
+                    ])
         
         self.deformerToggleUpdate()
         
@@ -83,8 +70,10 @@ class CurveTools:
        
     def deformerToggleUpdate(self):
         deformerExists = self.deformerExists()
-        cmds.button(self.buttons[0], edit=True, label=('Clear Deformer' if deformerExists else 'Set Deformer'))
-        cmds.iconTextButton(self.buttons[1], edit=True, image1=('precompExportChecked.png' if deformerExists else 'precompExportUnchecked.png'))
+        label = 'Clear Deformer' if deformerExists else 'Set Deformer'
+        cmds.button(self.buttons[0], edit=True, label=label)
+        icon = 'precompExportChecked.png' if deformerExists else 'precompExportUnchecked.png'
+        cmds.iconTextButton(self.buttons[1], edit=True, image1=icon)
 
     def deformerToggle(self, *args):
         if self.deformerExists():
@@ -109,7 +98,7 @@ class CurveTools:
             return False
         self.curve = selection[0]        
         
-        geoNodes = cmds.polyCylinder(sx=8, sy=1, sz=0, radius=1, height=1, axis=[1,0,0], name='reference')
+        geoNodes = cmds.polyCylinder(sx=8, sy=1, sz=0, radius=1, height=1, axis=[1, 0, 0], name='reference')
         referenceGeo = geoNodes[0]
         creator = geoNodes[1]
         
@@ -119,7 +108,7 @@ class CurveTools:
         
         self.previewGeo = cmds.duplicate(referenceGeo, ic=True, name='preview')[0]
         
-        locatorNodes = cmds.circle(normal=[1,0,0], sections=8, name='deformerHandle')
+        locatorNodes = cmds.circle(normal=[1, 0, 0], sections=8, name='deformerHandle')
         self.locator = locatorNodes[0]
         cmds.scale(1, 2.5, 2.5)
         
@@ -144,7 +133,11 @@ class CurveTools:
         cmds.setAttr(self.locator + '.sx', cmds.arclen(self.curve))
         
     def createWire(self):
-        self.deformCurve = cmds.curve(degree=1, p=[(0, 0, 0), (cmds.arclen(self.curve), 0, 0)], k=[0, 1], name='deformCurve')
+        self.deformCurve = cmds.curve(
+            degree=1,
+            p=[(0, 0, 0), (cmds.arclen(self.curve), 0, 0)],
+            k=[0, 1],
+            name='deformCurve')
     
         wireNodes = cmds.wire(self.previewGeo, wire=self.deformCurve)
         self.deformer = wireNodes[0]
@@ -177,14 +170,14 @@ class CurveTools:
         cmds.parent(self.baseWireCurve, self.locator)
         cmds.select(self.locator)
         
-    
     def finalize(self, *args):
         if not self.deformerExists():
             return
         if not self.locator:
             self.locator = cmds.listRelatives(self.baseWireCurve, parent=True, type='transform')[0]
         if not self.curveInfo:
-            self.curveInfo = cmds.listConnections(cmds.listRelatives(self.deformCurve, shapes=True, pa=True), type='curveInfo')[0]
+            relatives = cmds.listRelatives(self.deformCurve, shapes=True, pa=True)
+            self.curveInfo = cmds.listConnections(relatives, type='curveInfo')[0]
         cmds.parent(self.baseWireCurve, world=True)
         cmds.delete([self.locator, self.curveInfo])
         
@@ -194,7 +187,11 @@ class CurveTools:
         source = cmds.ls(selection=True)[0]
         target = cmds.ls(selection=True)[1]
         
-        cmds.rebuildCurve(source, ch=False, spans=cmds.getAttr(target + '.spans'), degree=cmds.getAttr(target + '.degree'))
+        cmds.rebuildCurve(
+            source,
+            ch=False,
+            spans=cmds.getAttr(target + '.spans'),
+            degree=cmds.getAttr(target + '.degree'))
         
         cv = 0
         while True:
@@ -202,7 +199,10 @@ class CurveTools:
             cmds.select(targetCv, replace=True)
             if cmds.ls(selection=True)[0] != targetCv:
                 break
-            cmds.xform('{}.cv[{}]'.format(source, cv), worldSpace=True, translation=cmds.pointPosition(targetCv, world=True))
+            cmds.xform(
+                '{}.cv[{}]'.format(source, cv),
+                worldSpace=True,
+                translation=cmds.pointPosition(targetCv, world=True))
             cv += 1
      
     def matchBase(self, *args):
@@ -218,9 +218,18 @@ class CurveTools:
         curvePiece = source
         for i in range(numSpans - 1):
             previous = curvePiece
-            curvePiece = cmds.detachCurve(curvePiece + '.ep[1]', ch=False, replaceOriginal=True, name='curvePiece')[0]
+            curvePiece = cmds.detachCurve(
+                curvePiece + '.ep[1]',
+                ch=False,
+                replaceOriginal=True,
+                name='curvePiece')[0]
             cmds.delete(previous)
-            cmds.move(cmds.arclen(curvePiece, ch=False), 0, 0, '{}.ep[{}]'.format(self.baseWireCurve, numSpans - i - 1), objectSpace=True, worldSpaceDistance=True)
+            cmds.move(
+                cmds.arclen(curvePiece, ch=False),
+                0, 0,
+                '{}.ep[{}]'.format(self.baseWireCurve, numSpans - i - 1),
+                objectSpace=True,
+                worldSpaceDistance=True)
         cmds.delete(curvePiece)
     
     def resetBase(self, *args):
@@ -229,7 +238,11 @@ class CurveTools:
             
         source = self.deformCurve
         target = self.baseWireCurve
-        cmds.rebuildCurve(target, ch=False, spans=cmds.getAttr(source + '.spans'), degree=cmds.getAttr(source + '.degree'))
+        cmds.rebuildCurve(
+            target,
+            ch=False,
+            spans=cmds.getAttr(source + '.spans'),
+            degree=cmds.getAttr(source + '.degree'))
      
     def toggleDeformer(self, *args):
         if not self.deformerExists():
@@ -268,7 +281,13 @@ class CurveTools:
             cmds.select(cvB, replace=True)
             if cmds.ls(selection=True)[0] != cvB:
                 break
-            self.curves.append(cmds.curve(degree=1, p=[cmds.pointPosition(cvA, world=True), cmds.pointPosition(cvB, world=True)], k=[0, 1], name='curvePart'))
+
+            curve = cmds.curve(
+                degree=1,
+                p=[cmds.pointPosition(cvA, world=True), cmds.pointPosition(cvB, world=True)],
+                k=[0, 1],
+                name='curvePart')
+            self.curves.append(curve)
             cv += 1
 
         cmds.select(self.source, r=True)
@@ -277,7 +296,13 @@ class CurveTools:
             
         self.fillets = []
         for i in range(1, len(self.curves)):
-            fillet = cmds.filletCurve(self.curves[i-1], self.curves[i], cp1=0, cp2=0, ch=True, name='curveFillet')
+            fillet = cmds.filletCurve(
+                self.curves[i-1],
+                self.curves[i],
+                cp1=0,
+                cp2=0,
+                ch=True,
+                name='curveFillet')
             self.fillets.append(fillet[0])
             cmds.connectAttr(self.source + '.radius', fillet[1] + '.radius')
         
@@ -285,11 +310,14 @@ class CurveTools:
 
         self.lastCV = cvA
 
-
     def createCurvePiece(self, cvA, cvB):
-        return cmds.curve(degree=1, p=[cmds.pointPosition(cvA, world=True), cmds.pointPosition(cvB, world=True)], k=[0, 1], name='curvePiece')
-         
-        
+        curve = cmds.curve(
+            degree=1,
+            p=[cmds.pointPosition(cvA, world=True), cmds.pointPosition(cvB, world=True)],
+            k=[0, 1],
+            name='curvePiece')
+        return curve
+
     def filletComplete(self, *args):
         cmds.deleteAttr(self.source + '.radius')
         
@@ -309,9 +337,7 @@ class CurveTools:
         cmds.select(result)
         cmds.rename(result, 'filletCurve')
 
-#
 
-curveTools = CurveTools()
-        
 def ui():
+    curveTools = CurveTools()
     curveTools.show()

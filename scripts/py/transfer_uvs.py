@@ -1,46 +1,35 @@
-'''
-  Author: Beat Reichenbach
-  Date: 9/1/2015
-  Version: 1.0
-
-  Description: Transfer UVs to multiple objects
-
-  Installation: 1. Copy the script to your maya profile, %USERPROFILE%\Documents\maya\scripts
-                2. Script is now available as a python module
-                3. Put the code below in a button (make sure to set it to python) or run in a python script window.
-  
-import br_transferUVs
-br_transferUVs.ui()
-
-'''
+# Transfer UVs to multiple objects.
 
 from maya import cmds
 
-window = 'transferUVsWindow'
+window = 'transfer_uvs_window'
 
-def transferUVs():
+
+def transfer_uvs():
     sampleSpace = cmds.radioButtonGrp('sampleSpace_radio', query=True, select=True)
-    sampleSpace = (0,1,4,5)[sampleSpace - 1]
+    sampleSpace = (0, 1, 4, 5)[sampleSpace - 1]
 
     method = cmds.radioButtonGrp('method_radio', query=True, select=True)
-    method = (0,3)[method - 1]
+    method = (0, 3)[method - 1]
     
-    deleteHistory = True if cmds.radioButtonGrp('deleteHistory_radio', query=True, select=True) == 2 else False
+    deleteHistory = (cmds.radioButtonGrp('deleteHistory_radio', query=True, select=True) == 2)
     
-    objects = cmds.ls(sl=True,type='transform')
-    source = cmds.ls(sl=True,head=True)
+    objects = cmds.ls(sl=True, type='transform')
+    source = cmds.ls(sl=True, head=True)
     objects.remove(source[0])
     for o in objects:
         cmds.transferAttributes(source, o, uvs=1, sampleSpace=sampleSpace, searchMethod=method)
         if deleteHistory:
             cmds.delete(o, ch=True)
-        
-def deleteWindow():
+
+
+def delete_window():
     cmds.deleteUI(window)
-        
+
+
 def ui():
     if cmds.window(window, exists=True):
-        deleteWindow()
+        delete_window()
     if cmds.windowPref(window, exists=True):
         cmds.windowPref(window, remove=True)
     
@@ -65,9 +54,9 @@ def ui():
     
     cmds.setParent(form)
     buttons = []
-    buttons.append(cmds.button(label='Transfer', width=170, command='br_transferUVs.transferUVs();br_transferUVs.deleteWindow()'))
-    buttons.append(cmds.button(label='Apply', width=170, command='br_transferUVs.transferUVs()'))
-    buttons.append(cmds.button(label='Close', width=170, command='br_transferUVs.deleteWindow()'))
+    buttons.append(cmds.button(label='Transfer', width=170, command='transfer_uvs.transfer_uvs(); transfer_uvs.delete_window()'))
+    buttons.append(cmds.button(label='Apply', width=170, command='transfer_uvs.transfer_uvs()'))
+    buttons.append(cmds.button(label='Close', width=170, command='transfer_uvs.delete_window()'))
     cmds.formLayout(form, edit=True, attachForm=[(buttons[0], 'left', 10), (buttons[0], 'top', 120)])
     cmds.formLayout(form, edit=True, attachForm=[(buttons[1], 'left', 190), (buttons[1], 'top', 120)])
     cmds.formLayout(form, edit=True, attachForm=[(buttons[2], 'left', 370), (buttons[2], 'top', 120)])

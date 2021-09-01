@@ -1,5 +1,6 @@
 from functools import wraps
 from maya import cmds
+import logging
 
 
 def undo(func):
@@ -10,7 +11,7 @@ def undo(func):
             return func(*args, **kwargs)
         except Exception as e:
             cmds.undoInfo(closeChunk=True)
-            print(e)
+            logging.error(e)
             cmds.undo()
         else:
             cmds.undoInfo(closeChunk=True)

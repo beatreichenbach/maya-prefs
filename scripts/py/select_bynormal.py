@@ -1,24 +1,14 @@
-'''
-  Author: Beat Reichenbach
-  Date: 8/17/2015
-  Version: 1.0
-
-  Description: Selects faces by normal (define threshold angle as parameter)
-
-  Installation: 1. Copy the script to your maya profile, %USERPROFILE%\Documents\maya\scripts
-                2. Script is now available as a python module
-                3. Put the code below in a button (make sure to set it to python) or run in a python script window.
-  
-import br_selectByNormal
-br_selectByNormal.selectByNormal(60)
-
-'''
+# Selects faces by normal.
+#
+# Args:
+#     angle (float): The angle in degrees that faces can face away from the selected face from.
+#     Default is 60.
 
 from maya import cmds
 import re
 
 
-def selectByNormal(angle=60):
+def select_by_normal(angle=60):
     selection = cmds.ls(selection=True)
     if not selection:
         return
@@ -26,7 +16,7 @@ def selectByNormal(angle=60):
     
     selectedFaces = []
     for s in cmds.ls(selection=True):
-        groups = re.search('f\[(\d+):?(\d+)?\]', s)
+        groups = re.search(r'f\[(\d+):?(\d+)?\]', s)
         if not groups:
             continue
         if len(groups.groups()) == 3:
@@ -44,8 +34,8 @@ def selectByNormal(angle=60):
     for i in range(cmds.polyEvaluate(object, f=True)):
         normal = [float(normals[i].rsplit(' ', 3)[j]) for j in range(-3, 0)]
         for vector in vectors:
-            dotProduct = sum(p*q for p,q in zip(normal, vector))
-            if dotProduct + angle/180.0 > 1:
+            dotProduct = sum(p*q for p, q in zip(normal, vector))
+            if dotProduct + angle / 180.0 > 1:
                 faces.append(i)
 
     cmds.select(clear=True)

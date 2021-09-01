@@ -1,10 +1,12 @@
+# Combines selected objects without destroying hierarchy and transforms.
+
+
 from maya import cmds
-from br_undo import undo
+from undo import undo
 
 
 @undo
 def combine():
-    # selection
     selection = cmds.ls(selection=True)
     first = selection[0]
 
