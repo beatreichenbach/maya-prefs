@@ -1,9 +1,9 @@
 # maya-prefs
 A maya setup with all my personal tools, hotkeys and shelves.
 
+![Screenshot](.github/screenshot.png)
 
 ## Installation:
-
 Move the contents of the maya folder into your maya [prefs location](https://knowledge.autodesk.com/support/maya/getting-started/caas/CloudHelp/cloudhelp/2022/ENU/Maya-Customizing/files/GUID-393D1ECA-9B6E-4625-B5B1-3F28E62AFB1C-htm.html).
 This can be found here:
 
@@ -14,6 +14,11 @@ This can be found here:
 Alternatively you can set your own path with the environment variable `MAYA_APP_DIR`.
 
 For my personal prefs I use the environment variable and use the `install.py` to copy the contents from the repository to the prefs folder.
+
+## Customization:
+All the buttons are labeled and are easy to figure out what they do. To customize this setup, simply remove buttons you don't want and delete the corresponding scripts. You can find a quick description of each script below. The rest of the buttons use simple maya commands.
+
+To customize hotkeys see the official [Autodesk documentation](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2022/ENU/Maya-KeyboardShortcuts/files/GUID-36D24C0F-19E4-411E-8CA9-DB7B64C3E6EA-htm.html).
 
 ## Hotkeys
 ### changeGridDivisions

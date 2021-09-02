@@ -3,9 +3,8 @@ import os
 import random
 
 from PySide2 import QtUiTools, QtWidgets
-from shiboken2 import wrapInstance
 
-from maya import cmds, OpenMayaUI
+from maya import cmds
 
 ATTRNAMES = {
     'translation': 'translate',
@@ -36,7 +35,7 @@ def select_random(objects, kwargs):
 
 
 def apply_transforms(objects, kwargs):
-    for obj, data in objects.iteritems():
+    for obj, data in objects.items():
         for i, attribute in enumerate(('translation', 'rotation', 'scale')):
             xform = []
             for j, (t, d) in enumerate(zip(data[attribute], kwargs[attribute])):
@@ -77,6 +76,7 @@ class RandomizeDialog(QtWidgets.QDialog):
     def _load_ui(self):
         loader = QtUiTools.QUiLoader()
         widget = loader.load(os.path.join(os.path.dirname(__file__), 'main.ui'))
+        self.setWindowTitle(widget.windowTitle())
         self.setLayout(widget.layout())
         self.__dict__.update(widget.__dict__)
 
@@ -161,7 +161,7 @@ class RandomizeDialog(QtWidgets.QDialog):
     def reject(self):
         cmds.select(list(self.objects.keys()), replace=True)
 
-        for obj, data in self.objects.iteritems():
+        for obj, data in self.objects.items():
             for attribute in ('translation', 'rotation', 'scale'):
                 cmds.setAttr('{}.{}'.format(obj, ATTRNAMES.get(attribute)), *data[attribute])
         cmds.undoInfo(closeChunk=True)
@@ -170,16 +170,15 @@ class RandomizeDialog(QtWidgets.QDialog):
 
 
 def show():
-    OpenMayaUI.MQtUtil.mainWindow()
-    mayaMainWindow = wrapInstance(int(OpenMayaUI.MQtUtil.mainWindow()), QtWidgets.QWidget)
-    dialog = RandomizeDialog(mayaMainWindow)
+    app = QtWidgets.QApplication.instance() or QtWidgets.QApplication(sys.argv)
+    main_window = next(w for w in app.topLevelWidgets() if w.objectName() == 'MayaWindow')
+    dialog = RandomizeDialog(main_window)
     dialog.show()
+    return main_window
 
 
 def main():
-    app = QtWidgets.QApplication.instance()
-    if app is None:
-        app = QtWidgets.QApplication(sys.argv)
+    app = QtWidgets.QApplication.instance() or QtWidgets.QApplication(sys.argv)
     dialog = RandomizeDialog()
     dialog.show()
     app.exec_()

@@ -9,15 +9,10 @@ def install():
         return
 
     current_directory = os.path.dirname(os.path.abspath(__file__))
+    maya_dir = os.path.join(current_directory, 'maya')
 
-    for file in os.listdir(current_directory):
-        if file.startswith('.'):
-            continue
-
-        if os.path.isfile(os.path.join(current_directory, file)):
-            continue
-
-        source = os.path.join(current_directory, file)
+    for file in os.listdir(maya_dir):
+        source = os.path.join(maya_dir, file)
         target = os.path.join(maya_app_dir, file)
 
         shutil.copytree(source, target, dirs_exist_ok=True)

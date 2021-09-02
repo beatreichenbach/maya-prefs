@@ -324,7 +324,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "from randomizer import gui\ngui.show()" 
+        -command "import randomizer\nmain_window = randomizer.show()"
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1
@@ -1222,7 +1222,7 @@ global proc shelf_Global () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import renamer\nrenamer.show()" 
+        -command "import renamer\nmain_window = renamer.show()"
         -sourceType "python" 
         -commandRepeatable 1
         -flat 1

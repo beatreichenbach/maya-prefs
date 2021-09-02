@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>main_widget</class>
- <widget class="QWidget" name="main_widget">
+ <class>Widget</class>
+ <widget class="QWidget" name="Widget">
   <property name="windowTitle">
    <string>Randomize</string>
   </property>

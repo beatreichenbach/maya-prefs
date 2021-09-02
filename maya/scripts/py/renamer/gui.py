@@ -3,9 +3,8 @@ import os
 import re
 
 from PySide2 import QtCore, QtUiTools, QtWidgets
-from shiboken2 import wrapInstance
 
-from maya import cmds, OpenMayaUI
+from maya import cmds
 from .undo import undo
 
 
@@ -73,6 +72,7 @@ class RenameDialog(QtWidgets.QDialog):
         loader = QtUiTools.QUiLoader()
         widget = loader.load(os.path.join(os.path.dirname(__file__), 'main.ui'))
         self.setLayout(widget.layout())
+        self.setWindowTitle(widget.windowTitle())
         self.__dict__.update(widget.__dict__)
         for element in self.__dict__.values():
             if isinstance(element, QtWidgets.QLineEdit):
@@ -122,16 +122,15 @@ class LineEdit(QtWidgets.QLineEdit):
 
 
 def show():
-    OpenMayaUI.MQtUtil.mainWindow()
-    mayaMainWindow = wrapInstance(int(OpenMayaUI.MQtUtil.mainWindow()), QtWidgets.QWidget)
-    dialog = RenameDialog(mayaMainWindow)
+    app = QtWidgets.QApplication.instance() or QtWidgets.QApplication(sys.argv)
+    main_window = next(w for w in app.topLevelWidgets() if w.objectName() == 'MayaWindow')
+    dialog = RenameDialog(main_window)
     dialog.show()
+    return main_window
 
 
 def main():
-    app = QtWidgets.QApplication.instance()
-    if app is None:
-        app = QtWidgets.QApplication(sys.argv)
+    app = QtWidgets.QApplication.instance() or QtWidgets.QApplication(sys.argv)
     dialog = RenameDialog()
     dialog.show()
     app.exec_()
