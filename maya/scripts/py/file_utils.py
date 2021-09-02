@@ -1,18 +1,18 @@
 # A collections of file utility functions.
-# import_files:
+# **import_files**
 # Import multiplie files and delete the mtl file when importing obj.
 #
 # Args:
 #     remove_materials (boolean): Removes the .mtl files for .obj files. Default is True.
 #
-# export_selected:
+# **export_selected**
 # Export selected to a specified temp directory as obj.
 #
 # Args:
 #     path (string): Specify a path to export files to. Default is <project>/export
 #     single (boolean): If set will export each selected object to a separate file. Default is false.
 #
-# save_incremental:
+# **save_incremental**
 # Save version up when using the v000 version pattern for naming.
 
 from maya import cmds

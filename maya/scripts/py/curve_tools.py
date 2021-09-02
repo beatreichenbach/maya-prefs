@@ -1,4 +1,5 @@
 # Curve tools to instance and place along curve
+# https://vimeo.com/209927561
 
 from maya import cmds
 from maya import mel
