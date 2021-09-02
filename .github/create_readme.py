@@ -19,8 +19,6 @@ This can be found here:
 Alternatively you can set your own path with the environment variable `MAYA_APP_DIR`.
 For my personal prefs I use the environment variable and use the install.py to copy the contents from the repository to the prefs folder.
 
-## Scripts:
-
 '''
 
 
@@ -52,7 +50,7 @@ def extract_docstring(file_path):
     if item_text:
         # add title
         filename, ext = os.path.splitext(os.path.basename(file_path))
-        item_text.insert(0, '#### {}'.format(filename))
+        item_text.insert(0, '### {}'.format(filename))
 
         # add new line at end
         item_text.append('')
@@ -73,6 +71,8 @@ def add_section(header, dir_path):
 
     path = os.path.join(current_directory, '..', dir_path)
 
+    content = []
+
     for file in os.listdir(path):
         file_path = os.path.join(path, file)
 
@@ -85,9 +85,13 @@ def add_section(header, dir_path):
         # read file and create text
         docstring = extract_docstring(file_path)
 
+        if docstring:
+            content.append(docstring)
+
+    if content:
         with open(README_PATH, 'a') as file:
-            file.write('### {}\n'.format(header))
-            file.write(docstring)
+            file.write('## {}\n'.format(header))
+            file.write('\n'.join(content))
 
 
 def create_readme():
@@ -96,7 +100,7 @@ def create_readme():
         file.write(README)
 
     add_section('Hotkeys', 'maya/scripts/hotkeys')
-    add_section('Py', 'maya/scripts/py')
+    add_section('Scripts', 'maya/scripts/py')
 
 
 if __name__ == '__main__':

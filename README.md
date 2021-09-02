@@ -14,50 +14,48 @@ This can be found here:
 Alternatively you can set your own path with the environment variable `MAYA_APP_DIR`.
 For my personal prefs I use the environment variable and use the install.py to copy the contents from the repository to the prefs folder.
 
-## Scripts:
-
-### Hotkeys
-#### changeGridDivisions
+## Hotkeys
+### changeGridDivisions
 Halves or doubles the divisions on the viewport grid.
 
 Args:
     smaller (boolean): Havles the number of divisions.
     bigger (boolean): Doubles the number of divisions.
-### Hotkeys
-#### pasteScene
+
+### pasteScene
 Pastes the current scene from the clipboard without the pasted__ prefix.
 This overrides the built in command for ctrl-v.
-### Hotkeys
-#### selectedChannelSetKey
+
+### selectedChannelSetKey
 Sets a key on the selected channels in the control box only.
-### Hotkeys
-#### toggleIsolateSelected
+
+### toggleIsolateSelected
 Toggles the state for the isolate selected in the current panel.
-### Py
-#### combine
+## Scripts
+### combine
 Combines selected objects without destroying hierarchy and transforms.
-### Py
-#### copy_transform
+
+### copy_transform
 Moves the selected object to the last selected object's position.
-### Py
-#### create_camera
+
+### create_camera
 Creates a camera from the current view in the active panel.
-### Py
-#### cube_unwrap
+
+### cube_unwrap
 Unwrap them cube like objects by cutting all edges on one face and then unwrapping it like a box.
 It will try to keep always one edge connected so it creates only one shell.
-### Py
-#### curve_tools
+
+### curve_tools
 Curve tools to instance and place along curve
 https://vimeo.com/209927561
-### Py
-#### cut_hard_edges
+
+### cut_hard_edges
 Cuts and unwraps objects based on hard edges.
-### Py
-#### extract_faces
+
+### extract_faces
 Extract the currently selected faces from the object without separating different shells. Slow!
-### Py
-#### file_utils
+
+### file_utils
 A collections of file utility functions.
 **import_files**
 Import multiplie files and delete the mtl file when importing obj.
@@ -74,63 +72,62 @@ Args:
 
 **save_incremental**
 Save version up when using the v000 version pattern for naming.
-### Py
-#### layout_uvs
+
+### layout_uvs
 Layout uvs grouped by objects and gap in between.
 
 Args:
     gap (float): Gap between each group of uvs in uvspace.
-### Py
-#### merge_vertices
+
+### merge_vertices
 Merge vertices and display how many vertices have been merged.
 
 Args:
     threshold (float): Distance threshold for merge operation.
-### Py
-#### mirror_patches
+
+### mirror_patches
 Mirrors the patches of selected UVs or all UVs on selected objects. Good with multiple UDIMs.
-### Py
-#### poly_smooth
+
+### poly_smooth
 Create duplicate mesh and apply subdivisions with all settings.
-### Py
-#### __init__
+
+### __init__
 Apply random transformations to objects with live preview functionality.
-### Py
-#### remove_namespaces
+
+### remove_namespaces
 Deletes all namespaces
 
 Args:
     name (string): Specify namespace to be removed.
-### Py
-#### remove_shapes
+
+### remove_shapes
 Removes any additional shape nodes if an object has more than one.
-### Py
-#### __init__
+
+### __init__
 Simple rename utility for batch renaming of objects.
-### Py
-#### rename_shadinggroups
+
+### rename_shadinggroups
 Rename ShadingGroup nodes to match their incoming material.
-### Py
-#### select_bynormal
+
+### select_bynormal
 Selects faces by normal.
 
 Args:
     angle (float): The angle in degrees that faces can face away from the selected face from.
     Default is 60.
-### Py
-#### select_hard_edges
+
+### select_hard_edges
 Select hard edges.
-### Py
-#### select_nth_edge
+
+### select_nth_edge
 Select every nth edge. Select two edges.
 It will complete the edge ring with every nth edge selected.
-### Py
-#### set_pivot
+
+### set_pivot
 Sets the translate pivot to the rotate/scale pivot.
-### Py
-#### transfer_uvs
+
+### transfer_uvs
 Transfer UVs to multiple objects.
-### Py
-### Py
-#### unwrap_objects
+
+### unwrap_objects
 Unwraps the whole objects with Unfold 3d instead of having to select UVs.
