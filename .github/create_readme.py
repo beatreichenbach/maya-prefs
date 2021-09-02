@@ -17,7 +17,8 @@ This can be found here:
 * **Linux:** /home/\<username\>/maya
 
 Alternatively you can set your own path with the environment variable `MAYA_APP_DIR`.
-For my personal prefs I use the environment variable and use the install.py to copy the contents from the repository to the prefs folder.
+
+For my personal prefs I use the environment variable and use the `install.py` to copy the contents from the repository to the prefs folder.
 
 '''
 
@@ -65,7 +66,7 @@ def extract_docstring(script_path):
     # add new line at end
     item_text.append('')
 
-    content = '\n'.join(item_text)
+    content = '\n\n'.join(item_text)
 
     return content
 
