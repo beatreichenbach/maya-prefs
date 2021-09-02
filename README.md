@@ -24,9 +24,9 @@ Halves or doubles the divisions on the viewport grid.
 
 Args:
 
-    smaller (boolean): Havles the number of divisions.
+smaller (boolean): Havles the number of divisions.
 
-    bigger (boolean): Doubles the number of divisions.
+bigger (boolean): Doubles the number of divisions.
 
 
 ### pasteScene
@@ -97,7 +97,7 @@ Import multiplie files and delete the mtl file when importing obj.
 
 Args:
 
-    remove_materials (boolean): Removes the .mtl files for .obj files. Default is True.
+remove_materials (boolean): Removes the .mtl files for .obj files. Default is True.
 
 
 
@@ -109,9 +109,9 @@ Export selected to a specified temp directory as obj.
 
 Args:
 
-    path (string): Specify a path to export files to. Default is <project>/export
+path (string): Specify a path to export files to. Default is <project>/export
 
-    single (boolean): If set will export each selected object to a separate file. Default is false.
+single (boolean): If set will export each selected object to a separate file. Default is false.
 
 
 
@@ -128,7 +128,7 @@ Layout uvs grouped by objects and gap in between.
 
 Args:
 
-    gap (float): Gap between each group of uvs in uvspace.
+gap (float): Gap between each group of uvs in uvspace.
 
 
 ### merge_vertices
@@ -139,7 +139,7 @@ Merge vertices and display how many vertices have been merged.
 
 Args:
 
-    threshold (float): Distance threshold for merge operation.
+threshold (float): Distance threshold for merge operation.
 
 
 ### mirror_patches
@@ -165,7 +165,7 @@ Deletes all namespaces
 
 Args:
 
-    name (string): Specify namespace to be removed.
+name (string): Specify namespace to be removed.
 
 
 ### remove_shapes
@@ -191,9 +191,9 @@ Selects faces by normal.
 
 Args:
 
-    angle (float): The angle in degrees that faces can face away from the selected face from.
+angle (float): The angle in degrees that faces can face away from the selected face from.
 
-    Default is 60.
+Default is 60.
 
 
 ### select_hard_edges

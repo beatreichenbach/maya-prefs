@@ -50,7 +50,7 @@ def extract_docstring(script_path):
     with open(file_path, 'r') as file:
         text = file.readlines()
         for line in text:
-            match = re.search(r'^(?:#|//) ?(.*)', line)
+            match = re.search(r'^(?:#|//) *(.*)', line)
             if match:
                 item_text.append(match.group(1))
             else:
