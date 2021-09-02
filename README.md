@@ -188,7 +188,7 @@ Simple rename utility for batch renaming of objects.
 Rename ShadingGroup nodes to match their incoming material.
 
 
-### select_bynormal
+### select_by_normal
 
 Selects faces by normal.
 
