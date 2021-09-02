@@ -24,17 +24,27 @@ For my personal prefs I use the environment variable and use the install.py to c
 
 README_PATH = '../README.md'
 
-def extract_docstring(file_path):
+def extract_docstring(script_path):
     '''Parses a file and extracts the first comment from it.
     Expects first line to start with a comment. Stops after first line that isn't commented.
     Only works with single line comments.
 
     Args:
-        file_path (string): the path to the file
+        script_path (string): the path to the file or package
 
     Returns:
         (string): Rhe extracted comment.
     '''
+
+    if os.path.isdir(script_path):
+        file_path = os.path.join(script_path, '__init__.py')
+        if not os.path.isfile(file_path):
+            return
+    elif os.path.isfile(script_path):
+        file_path = script_path
+    else:
+        return
+
     item_text = []
     with open(file_path, 'r') as file:
         text = file.readlines()
@@ -45,17 +55,17 @@ def extract_docstring(file_path):
             else:
                 break
 
-    content = ''
+    if not item_text:
+        return
 
-    if item_text:
-        # add title
-        filename, ext = os.path.splitext(os.path.basename(file_path))
-        item_text.insert(0, '### {}'.format(filename))
+    # add title
+    filename, ext = os.path.splitext(os.path.basename(script_path))
+    item_text.insert(0, '### {}'.format(filename))
 
-        # add new line at end
-        item_text.append('')
+    # add new line at end
+    item_text.append('')
 
-        content = '\n'.join(item_text)
+    content = '\n'.join(item_text)
 
     return content
 
@@ -75,12 +85,6 @@ def add_section(header, dir_path):
 
     for file in os.listdir(path):
         file_path = os.path.join(path, file)
-
-        # handle packages
-        if os.path.isdir(file_path):
-            file_path = os.path.join(file_path, '__init__.py')
-            if not os.path.isfile(file_path):
-                continue
 
         # read file and create text
         docstring = extract_docstring(file_path)

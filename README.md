@@ -91,7 +91,7 @@ Mirrors the patches of selected UVs or all UVs on selected objects. Good with mu
 ### poly_smooth
 Create duplicate mesh and apply subdivisions with all settings.
 
-### __init__
+### randomizer
 Apply random transformations to objects with live preview functionality.
 
 ### remove_namespaces
@@ -103,7 +103,7 @@ Args:
 ### remove_shapes
 Removes any additional shape nodes if an object has more than one.
 
-### __init__
+### renamer
 Simple rename utility for batch renaming of objects.
 
 ### rename_shadinggroups
