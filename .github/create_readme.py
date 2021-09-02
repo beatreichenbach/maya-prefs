@@ -12,9 +12,9 @@ A maya setup with all my personal tools, hotkeys and shelves.
 Move the contents of the maya folder into your maya [prefs location](https://knowledge.autodesk.com/support/maya/getting-started/caas/CloudHelp/cloudhelp/2022/ENU/Maya-Customizing/files/GUID-393D1ECA-9B6E-4625-B5B1-3F28E62AFB1C-htm.html).
 This can be found here:
 
-**Windows:** <drive>:\Documents\maya
-**Mac OS X:** /Users/<username>/Library/Preferences/Autodesk/maya
-**Linux:** /home/<username>/maya
+* **Windows:** <drive>:\Documents\maya
+* **Mac OS X:** /Users/<username>/Library/Preferences/Autodesk/maya
+* **Linux:** /home/<username>/maya
 
 Alternatively you can set your own path with the environment variable `MAYA_APP_DIR`.
 For my personal prefs I use the environment variable and use the install.py to copy the contents from the repository to the prefs folder.
