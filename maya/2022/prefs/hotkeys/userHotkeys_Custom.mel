@@ -24,7 +24,6 @@ hotkey -keyShortcut "r" -name ("scalePressNameCommand");
 hotkey -keyShortcut "\\" -releaseName ("");
 hotkey -keyShortcut "r" -releaseName ("scaleReleaseNameCommand");
 hotkey -keyShortcut "d" -alt -name ("duplicateInputConnectionsNameCommand");
-hotkey -keyShortcut "i" -sht -name ("toggleIsolateSelectedNameCommand");
 hotkeyCtx -type "Editor" -addClient "graphEditor";
 hotkeyCtx -type "Editor" -addClient "nodeEditorPanel";
 hotkeyCtx -type "Editor" -addClient "polyTexturePlacementPanel";

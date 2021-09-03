@@ -9,12 +9,6 @@ nameCommand
 	selectedChannelSetKeyNameCommand;
 
 nameCommand
-	-annotation "toggleIsolateSelectedNameCommand"
-	-sourceType "mel"
-	-command ("toggleIsolateSelected")
-	toggleIsolateSelectedNameCommand;
-
-nameCommand
 	-annotation "largerGridNameCommand"
 	-sourceType "mel"
 	-command ("largerGrid")

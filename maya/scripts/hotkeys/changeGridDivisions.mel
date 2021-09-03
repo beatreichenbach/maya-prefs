@@ -1,16 +1,15 @@
 // Halves or doubles the divisions on the viewport grid.
 //
 // Args:
-//     smaller (boolean): Havles the number of divisions.
-//     bigger (boolean): Doubles the number of divisions.
+//     change (int): Havles the number of divisions if set to -1. Doubles if set to 1.
 
-global proc changeGridDivisions(boolean smaller = false, boolean bigger = false) {
-    if ($smaller && $bigger || !$smaller && !$bigger) {
-        return;
-    } else if ($smaller) {
+global proc changeGridDivisions(int $change) {
+    if ($change == -1) {
         grid -divisions (`grid -query -divisions` / 2);
-    } else if ($bigger) {
+    } else if ($change == 1) {
         grid -divisions (`grid -query -divisions` * 2);
+    } else {
+        return;
     }
 
     float $divisions = `grid -query -spacing` / `grid -query -divisions`;

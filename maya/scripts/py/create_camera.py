@@ -3,7 +3,7 @@
 from maya import cmds
 
 
-def create_camera(name='shotCam'):
+def create_camera(name='camera'):
     sourceCam = cmds.modelPanel(cmds.getPanel(withFocus=True), query=True, camera=True)
     cam = cmds.camera()[0]
     cam = cmds.rename(cam, name)

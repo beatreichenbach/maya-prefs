@@ -25,7 +25,7 @@ runTimeCommand
 	-category "Custom Scripts"
 	-hotkeyCtx ""
 	-commandLanguage "mel"
-	-command ("changeGridDivisions(bigger=true);")
+	-command ("changeGridDivisions 1;")
 	largerGrid;
 
 runTimeCommand
@@ -38,21 +38,8 @@ runTimeCommand
 	-category "Custom Scripts"
 	-hotkeyCtx ""
 	-commandLanguage "mel"
-	-command ("changeGridDivisions(smaller=true);")
+	-command ("changeGridDivisions -1;")
 	smallerGrid;
-
-runTimeCommand
-	-label ""
-	-image ""
-	-tags ""
-	-keywords ""
-	-plugin ""
-	-annotation ""
-	-category "Custom Scripts"
-	-hotkeyCtx ""
-	-commandLanguage "mel"
-	-command ("toggleIsolateSelected();")
-	toggleIsolateSelected;
 
 runTimeCommand
 	-label ""

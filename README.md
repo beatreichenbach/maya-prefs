@@ -29,9 +29,7 @@ Halves or doubles the divisions on the viewport grid.
 
 Args:
 
-smaller (boolean): Havles the number of divisions.
-
-bigger (boolean): Doubles the number of divisions.
+change (int): Havles the number of divisions if set to -1. Doubles if set to 1.
 
 
 ### pasteScene
@@ -44,11 +42,6 @@ This overrides the built in command for ctrl-v.
 ### selectedChannelSetKey
 
 Sets a key on the selected channels in the control box only.
-
-
-### toggleIsolateSelected
-
-Toggles the state for the isolate selected in the current panel.
 
 ## Scripts
 ### combine

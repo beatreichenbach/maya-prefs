@@ -1,8 +1,0 @@
-// Toggles the state for the isolate selected in the current panel.
-
-global proc toggleIsolateSelected() {
-    $currentPanel = `getPanel -wf`;
-    $state = `isolateSelect -q -state $currentPanel`;
-    $state = 1 - $state;
-    enableIsolateSelect $currentPanel $state;
-}
