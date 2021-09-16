@@ -5,9 +5,9 @@
 
 global proc changeGridDivisions(int $change) {
     if ($change == -1) {
-        grid -divisions (`grid -query -divisions` / 2);
-    } else if ($change == 1) {
         grid -divisions (`grid -query -divisions` * 2);
+    } else if ($change == 1) {
+        grid -divisions (`grid -query -divisions` / 2);
     } else {
         return;
     }
