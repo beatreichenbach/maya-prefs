@@ -180,6 +180,40 @@ global proc shelf_Global () {
         -commandRepeatable 1
         -flat 1
     ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Select 2 or 3 vertices on an object to align the axis to those."
+        -enableBackground 0
+        -backgroundColor 0 0 0
+        -highlightColor 0.321569 0.521569 0.65098
+        -align "center"
+        -label "ALign Object"
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont"
+        -overlayLabelColor 0.8 0.8 0.8
+        -overlayLabelBackColor 0 0 0 0.5
+        -image "buttonManip.svg"
+        -image1 "buttonManip.svg"
+        -style "iconOnly"
+        -marginWidth 1
+        -marginHeight 1
+        -command "from align_object import align_object\nalign_object()"
+        -sourceType "python"
+        -commandRepeatable 1
+        -flat 1
+    ;
     separator
         -enable 1
         -width 34

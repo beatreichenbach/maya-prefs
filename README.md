@@ -41,9 +41,20 @@ This overrides the built in command for ctrl-v.
 
 ### selectedChannelSetKey
 
-Sets a key on the selected channels in the control box only.
+Sets a key on the selected channels in the control box.
 
 ## Scripts
+### align_object
+
+Select 2 or 3 vertices on an object to align the axis to those.
+
+Select three vertices A, B, (C) that form a right angle in the following order:
+
+.A .B
+
+.C
+
+
 ### combine
 
 Combines selected objects without destroying hierarchy and transforms.
