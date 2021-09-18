@@ -29,7 +29,7 @@ class Isolate():
             cmds.parent(self.children, self.object)
             cmds.delete(self.child_group)
 
-def alignObject():
+def align_object():
     selection = cmds.ls(selection=True, flatten=True)
     vertices = [vertex for vertex in selection if '.vtx[' in vertex]
     locators = []
