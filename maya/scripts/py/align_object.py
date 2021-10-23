@@ -65,7 +65,7 @@ def align_object():
             worldUpObject=locators[2])
 
     with Isolate(object) as i:
-        cmds.parent(object, locators[0])
-        cmds.makeIdentity(apply=True, rotate=True)
+        cmds.parent(i, locators[0])
+        cmds.makeIdentity(i, apply=True, rotate=True)
 
     cmds.delete(locators)

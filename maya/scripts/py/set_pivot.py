@@ -24,4 +24,4 @@ def set_pivot():
             cmds.parent(children, s)
             cmds.delete(childGrp)     
         cmds.delete(tempGrp)
-        cmds.select(s, replace=True)
+    cmds.select(selection, replace=True)
