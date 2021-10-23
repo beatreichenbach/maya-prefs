@@ -1,8 +1,0 @@
-// Sets a key on the selected channels in the control box.
-
-global proc selectedChannelSetKey() {
-    $selectedAttrs = `channelBox -q -sma mainChannelBox`;
-    for( $attr in $selectedAttrs ) {
-        setKeyframe -at $attr;
-    }
-}

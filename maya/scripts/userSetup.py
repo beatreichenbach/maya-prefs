@@ -1,7 +1,7 @@
 import os
 import sys
 import logging
-from maya import cmds
+from maya import cmds, mel
 
 
 def startup():
@@ -14,11 +14,15 @@ def startup():
     os.environ['MAYA_PLUG_IN_PATH'] += os.pathsep + os.path.join(maya_app_dir, 'plugins')
     os.environ['MAYA_SCRIPT_PATH'] += os.pathsep + os.path.join(maya_script_dir, 'external')
     os.environ['MAYA_SCRIPT_PATH'] += os.pathsep + os.path.join(maya_script_dir, 'hotkeys')
+    sys.path.append(os.path.join(maya_script_dir, 'hotkeys'))
     sys.path.append(os.path.join(maya_script_dir, 'py'))
     sys.path.append(os.path.join(maya_script_dir, 'external'))
 
     if not cmds.about(batch=True):
         cmds.hotkeySet('Custom', edit=True, current=True)
+
+    # override pasteScene function
+    mel.eval('source pasteScene.mel;')
 
 
 cmds.evalDeferred(startup, lowestPriority=True)

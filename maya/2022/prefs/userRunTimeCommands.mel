@@ -11,8 +11,8 @@ runTimeCommand
 	-annotation ""
 	-category "Custom Scripts"
 	-hotkeyCtx ""
-	-commandLanguage "mel"
-	-command ("selectedChannelSetKey();")
+	-commandLanguage "python"
+	-command ("import selectedChannelSetKey\nselectedChannelSetKey.selectedChannelSetKey()")
 	selectedChannelSetKey;
 
 runTimeCommand
@@ -24,8 +24,8 @@ runTimeCommand
 	-annotation ""
 	-category "Custom Scripts"
 	-hotkeyCtx ""
-	-commandLanguage "mel"
-	-command ("changeGridDivisions 1;")
+	-commandLanguage "python"
+	-command ("import changeGridDivisions\nchangeGridDivisions.changeGridDivisions(1)")
 	largerGrid;
 
 runTimeCommand
@@ -37,8 +37,8 @@ runTimeCommand
 	-annotation ""
 	-category "Custom Scripts"
 	-hotkeyCtx ""
-	-commandLanguage "mel"
-	-command ("changeGridDivisions -1;")
+	-commandLanguage "python"
+	-command ("import changeGridDivisions\nchangeGridDivisions.changeGridDivisions(-1)")
 	smallerGrid;
 
 runTimeCommand
