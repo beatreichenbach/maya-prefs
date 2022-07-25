@@ -1,18 +1,38 @@
 # Extract the currently selected faces from the object without separating different shells. Slow!
 
-import pymel.core as pm
-
+from maya import cmds, mel
 
 def extract_faces():
-    faces = pm.ls(sl=True)
-    facesNum = []
-    for f in faces:
-        facesNum.extend(f.indices())
+    faces = cmds.filterExpand(selectionMask=34, expand=False, fullPath=False) # Polygon Face
+    if not faces:
+        cmds.error("No faces selected.")
 
-    origTransform = pm.listRelatives(pm.listRelatives(p=True)[0], p=True)[0]
-    newTransform = pm.duplicate(origTransform)[0]
+    shapes = set(cmds.listRelatives(faces, parent=True, fullPath=True))
+    objects = cmds.listRelatives(shapes, parent=True, fullPath=True)
 
-    pm.delete(origTransform.f[facesNum])
-    pm.select(newTransform.f[:], r=True)
-    pm.select(newTransform.f[facesNum], d=True)
-    pm.delete()
+    # duplicate objects and remove any children
+    duplicates = []
+    for object in objects:
+        duplicate = cmds.duplicate(object)[0]
+        duplicates.append(duplicate)
+
+        children = cmds.listRelatives(duplicate, children=True, type='transform', fullPath=True)
+        if children:
+            cmds.delete(children)
+
+    # get selected faces on duplicates
+    cmds.select(duplicates)
+    mel.eval('changeSelectMode -component;')
+    duplicateFaces = cmds.filterExpand(selectionMask=34, expand=False, fullPath=False) # Polygon Face
+
+    # invert selection on duplicates
+    cmds.select(clear=True)
+    for object in duplicates:
+        cmds.select('{}.f[*]'.format(object), add=True)
+    cmds.select(duplicateFaces, deselect=True)
+    cmds.delete()
+
+    # delete original selection
+    cmds.delete(faces)
+
+    cmds.select(duplicates, replace=True)

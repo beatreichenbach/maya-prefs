@@ -6,28 +6,6 @@
 
 from maya import cmds
 
-class Isolate():
-    def __init__(self, object):
-        self.object = object
-
-    def __enter__(self):
-        self.parents = cmds.listRelatives(self.object, parent=True, type='transform', path=True)
-        self.children = cmds.listRelatives(self.object, children=True, type='transform', path=True)
-
-        if self.children:
-            self.child_group = cmds.group(empty=True)
-            self.children = cmds.parent(self.children, self.child_group)
-
-        return self.object
-
-    def __exit__(self, type, value, traceback):
-        if self.parents:
-            self.object = cmds.parent(self.object, self.parents[0])
-        else:
-            self.object = cmds.parent(self.object, w=True)
-        if self.children:
-            cmds.parent(self.children, self.object)
-            cmds.delete(self.child_group)
 
 def align_object():
     selection = cmds.ls(selection=True, flatten=True)
@@ -37,7 +15,7 @@ def align_object():
     if not vertices:
         return
 
-    object = vertices[0].split('.')[0]
+    obj = vertices[0].split('.')[0]
 
     for vertex in vertices[:3]:
         position = cmds.xform(vertex, query=True, worldSpace=True, translation=True)
@@ -64,8 +42,22 @@ def align_object():
             worldUpType='object',
             worldUpObject=locators[2])
 
-    with Isolate(object) as i:
-        cmds.parent(i, locators[0])
-        cmds.makeIdentity(i, apply=True, rotate=True)
+    parents = cmds.listRelatives(obj, parent=True, type='transform', path=True)
+    children = cmds.listRelatives(obj, children=True, type='transform', path=True)
+
+    if children:
+        child_group = cmds.group(empty=True)
+        children = cmds.parent(children, child_group)
+
+    obj = cmds.parent(obj, locators[0])
+    cmds.makeIdentity(obj, apply=True, rotate=True)
+
+    if parents:
+        obj = cmds.parent(obj, parents[0])
+    else:
+        obj = cmds.parent(obj, world=True)
+    if children:
+        cmds.parent(children, obj)
+        cmds.delete(child_group)
 
     cmds.delete(locators)
